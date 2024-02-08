@@ -4,8 +4,7 @@
   tasks:
     - name: Check Tomcat
       service_facts:
-        - pattern: tomcat9
-
-    - name: Check Tomcat Status
+        pattern: tomcat9.service
+    - name: Tomcat Status
       debug:
-        var: ansible_facts.services['tomcat9'].state
+        var: ansible_facts.services['tomcat9.service'].state

@@ -7,5 +7,5 @@
     - name: Service Facts
       service_facts:
 
-    - debug:
-        msg: "{{ services[SERVICE]['status'] }}"
+#    - debug:
+#        msg: "{{ services[SERVICE]['status'] }}"

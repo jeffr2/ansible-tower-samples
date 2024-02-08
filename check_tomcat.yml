@@ -1,10 +1,11 @@
-- name: Check Tomcat9 Sample
+- name: Check service status
   hosts: all
-  gather_facts: true
+  gather_facts: no
+  vars:
+    SERVICE: tomcat9.service
   tasks:
-    - name: Check Tomcat
+    - name: Service Facts
       service_facts:
-        pattern: tomcat9.service
-    - name: Tomcat Status
-      debug:
-        var: ansible_facts.services['tomcat9.service'].state
+
+    - debug:
+        msg: "{{ services[SERVICE]['status'] }}"

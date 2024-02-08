@@ -3,10 +3,10 @@
   hosts: all
   gather_facts: no
   vars:
-    SERVICE: firewalld.service
+    SERVICE: tomcat9.service
   tasks:
     - name: Service Facts
       service_facts:
 
     - debug:
-        msg: "{{ [SERVICE] }}"
+        msg: "{{ services[SERVICE] }}"

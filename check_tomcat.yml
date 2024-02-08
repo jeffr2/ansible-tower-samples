@@ -1,5 +1,6 @@
 - name: Check Tomcat9 Sample
   hosts: all
+  gather_facts: true
   tasks:
     - name: Check Tomcat
       service_facts:

@@ -5,7 +5,5 @@
     SERVICE: tomcat9.service
   tasks:
     - name: Service Facts
-      service_facts:
-
-#    - debug:
-#        msg: "{{ services[SERVICE]['status'] }}"
+      debug:
+        var: service_facts

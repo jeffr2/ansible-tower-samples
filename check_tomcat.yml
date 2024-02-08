@@ -1,0 +1,10 @@
+- name: Check Tomcat9 Sample
+  hosts: all
+  tasks:
+    - name: Check Tomcat
+      service_facts:
+        - pattern: tomcat9
+
+    - name: Check Tomcat Status
+      debug:
+        var: ansible_facts.services['tomcat9'].state

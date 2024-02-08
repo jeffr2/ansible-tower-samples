@@ -1,9 +1,12 @@
+---
 - name: Check service status
   hosts: all
   gather_facts: no
   vars:
-    SERVICE: tomcat9.service
+    SERVICE: firewalld.service
   tasks:
     - name: Service Facts
-      debug:
-        var: service_facts
+      service_facts:
+
+    - debug:
+        msg: "{{ [SERVICE] }}"

@@ -4,8 +4,9 @@
   gather_facts: no
   tasks:
     - name: Executar Get-Website
-      win_shell: $sites = Get-Website | Format-Table -AutoSize | Out-String
-      Write-Output $sites
+      script: |
+        $sites = Get-Website | Format-Table -AutoSize | Out-String
+        Write-Output $sites
       register: resultado
 
     - name: Exibir Resultado

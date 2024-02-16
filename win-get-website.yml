@@ -4,9 +4,7 @@
   gather_facts: no
   tasks:
     - name: Executar Get-Website
-      win_shell: |
-        cmd.exe /c "%windir%\system32\inetsrv\appcmd.exe list app"
-        echo teste
+      win_shell: $result = cmd.exe /c "%windir%\system32\inetsrv\appcmd.exe list app"; foreach($line in $($result -split "`r`n")) { $array = $line.Split('"'); Write-Output $array[1] }
       register: resultado
 
     - name: Exibir Resultado

@@ -4,7 +4,7 @@
   gather_facts: no
   tasks:
     - name: Executar Get-IISSite
-      win_shell: Get-IISSite
+      win_shell: Get-Website
       register: resultado
 
     - name: Exibir Resultado

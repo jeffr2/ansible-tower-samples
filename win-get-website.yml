@@ -4,7 +4,7 @@
   gather_facts: no
   tasks:
     - name: Executar Get-Website
-      win_shell: |
+      script: |
       cmd.exe /c "%windir%\system32\inetsrv\appcmd.exe list app"
       echo teste
       register: resultado

@@ -8,5 +8,5 @@
       register: resultado
 
     - name: Exibir Resultado
-        debug:
-          var: resultado.stdout
+      debug:
+        var: resultado.stdout

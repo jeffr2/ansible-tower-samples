@@ -1,0 +1,12 @@
+---
+- name Executar Get-IISSite
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Executar Get-IISSite
+      win_shell: Get-IISSite
+      register: resultado
+
+    - name: Exibir Resultado
+        debug:
+          var: resultado.stdout

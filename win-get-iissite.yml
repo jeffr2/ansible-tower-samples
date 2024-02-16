@@ -4,7 +4,7 @@
   gather_facts: no
   tasks:
     - name: Executar Get-Website
-      win_shell: Get-Website
+      win_shell: Get-Website | Select-Object Name
       register: resultado
 
     - name: Exibir Resultado

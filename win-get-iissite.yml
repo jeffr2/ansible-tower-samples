@@ -9,4 +9,4 @@
 
     - name: Exibir Resultado
       debug:
-        var: resultado.stdout
+        var: resultado.stdout_lines

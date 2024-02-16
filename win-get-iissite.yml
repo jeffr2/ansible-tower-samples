@@ -1,5 +1,5 @@
 ---
-- name Executar Get-IISSite
+- name: Executar Get-IISSite
   hosts: all
   gather_facts: no
   tasks:

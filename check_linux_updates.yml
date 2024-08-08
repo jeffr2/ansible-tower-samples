@@ -1,0 +1,36 @@
+---
+- name: Check Linux Updates
+  hosts: linux_all
+  tasks:
+    - name: Check updates Debian-like
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+      register: apt_updates
+      when: ansible_os_family == "Debian"
+
+    - name: Check updates RedHat-like
+      yum:
+        list: updates
+      register: yum_updates
+      when: ansible_os_family == "RedHat"
+
+    - name: Display available updates Debian-like
+      debug:
+        msg: >-
+          {%- set output=[] -%}
+          {%- for p in apt_updates.results -%}
+          {{ output.append('%-40s' % (p.name ~ '-' ~ p.version) ~ ' | repo: ' ~ p.repo) }}
+          {%- endfor -%}
+          {{ output }}
+      when: ansible_os_family == "Debian"
+
+    - name: Display available updates RedHat-like
+      debug:
+        msg: >-
+          {%- set output=[] -%}
+          {%- for p in yum_updates.results -%}
+          {{ output.append('%-40s' % (p.name ~ '-' ~ p.version) ~ ' | repo: ' ~ p.repo) }}
+          {%- endfor -%}
+          {{ output }}
+      when: ansible_os_family == "RedHat"

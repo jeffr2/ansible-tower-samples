@@ -1,0 +1,36 @@
+---
+- name: Gerar PFX e substituir nos servidores RavenDB
+  hosts: windows_caserver
+  tasks:
+
+    - name: Gerar o arquivo PFX no servidor CA via PowerShell
+      win_shell: |
+        <script>
+      become: yes
+      become_method: runas
+      become_user: Administrator
+
+    - name: Transferir o PFX para o servidor de Ansible (controller)
+      fetch:
+        src: C:\Temp\certificate.pfx
+        dest: /tmp/
+        flat: yes
+
+- name: Distribuir e substituir o PFX nos servidores RavenDB
+  hosts: linux_ravendb
+  tasks:
+    - name: Fazer backup do PFX atual
+      command: mv /opt/ravendb/RavenDB/Server/certificate.pfx /opt/ravendb/backup/certificate.pfx_{{ ansible_date_time.date }}
+
+    - name: Copiar o novo PFX para o servidor RavenDB
+      copy:
+        src: /tmp/certificate.pfx
+        dest: /opt/ravendb/RavenDB/Server/certificate.pfx
+        owner: ravendb
+        group: ravendb
+        mode: '0755'
+
+    - name: Reiniciar o serviço RavenDB
+      service:
+        name: ravendb
+        state: restarted
